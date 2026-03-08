@@ -1,0 +1,5 @@
+duonlabs
+    requests
+    python-dotenv
+    Pillow
+    
