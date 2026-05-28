@@ -1,0 +1,37 @@
+name: SignalPulse AI Bot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'signalpulse_ai_bot.py'
+      - 'requirements.txt'
+
+jobs:
+  lint:
+    name: Lint & Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Syntax check
+        run: python -m py_compile signalpulse_ai_bot.py && echo "✅ Syntax OK"
+
+      - name: Import check
+        run: python -c "import signalpulse_ai_bot" && echo "✅ Imports OK"
+        env:
+          TELEGRAM_BOT_TOKEN: "test"
+          TELEGRAM_CHANNEL_ID: "@test"
+          DISCORD_BOT_TOKEN: "test"
+          DISCORD_CHANNEL_ID: "000"
+          DUONLABS_API_KEY: "test"
+          TIKTOK_CLIENT_KEY: "test"
+          TIKTOK_CLIENT_SECRET: "test"
