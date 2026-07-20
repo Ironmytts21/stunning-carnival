@@ -8,7 +8,6 @@ import os
 import time
 import random
 import requests
-import json
 from datetime import datetime
 from dotenv import load_dotenv
 
